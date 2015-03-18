@@ -14,15 +14,6 @@ This is an API wrapper to use in conjunction with an Elvanto account. This wrapp
 
 ### Installation
 
-#### Pip installation
-
-The simplest way to install any python library, we recommend this method.
-
-```python
-pip install ElvantoAPI
-```
-
-#### Building from Source
 * Download
 * Navigate to folder you downloaded the source
 * `python setup.py install`
