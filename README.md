@@ -14,7 +14,7 @@ This is an API wrapper to use in conjunction with an Elvanto account. This wrapp
 
 ### Installation
 
-####PIP Installation
+#### PIP Installation
 
 PIP is the preferred installation method.
 
@@ -23,7 +23,7 @@ python get-pip.py
 pip install ElvantoAPI
 ```
 
-####Downloading
+#### Downloading
 
 * Download
 * Navigate to folder you downloaded the source
@@ -31,7 +31,7 @@ pip install ElvantoAPI
 
 ### For Authentication using an API Key:
 
-First get your API key from Settings > Account settings, then in the program.
+First get your API key from Settings > Account Settings, then in the program:
 
 ```python
 import ElvantoAPI
@@ -41,7 +41,7 @@ connection = ElvantoAPI.Connection(APIKey=string)
 ### For Authentication via OAuth 
 
 First direct users to the required URL.
-Use the `_GetURL` function to do this. The arguement `WebOrNon` is used to describe if you are developing a 
+Use the `_AuthorizeURL` function to do this. The arguement `WebOrNon` is used to describe if you are developing a 
 WebApp or a Non Web App (Ie, a program not in a browser) - For the most part OAuth would be used for Webapps
 
 ```python
@@ -50,6 +50,7 @@ URL = ElvantoAPI._AuthorizeURL(client_id, redirect_uri, scope, WebOrNon)
 ```
 
 #### For Webapps
+
 After the user has logged in, they will be sent back to the specified redirect_uri, with a code, and any state you specify.
 For example:
 
@@ -57,7 +58,7 @@ For example:
 http://mywebapp.com/login/?code=string
 ```
 
-The next step is to take this code, and get your access tokens. The Code here is the code in the above URL.
+The next step is to take this code, and get your access tokens. The code here is the code in the above URL.
 
 ```python
 tokens = ElvantoAPI._GetTokens(client_id, client_secret, code, redirect_uri)
@@ -67,9 +68,9 @@ This will return a dict object of the form:
 
 ```python
 {
-	"access_token": "e1e8422f78d9cf3c44b6e3d4beb065833abf",
+	"access_token": "e1e8422f68d8cf3c44b6e3d4beb065722abf",
 	"expires_in": 1209600,
-	"refresh_token": "6d49263f6fb7671bf1bb79ac81c63c12bc62533221"
+	"refresh_token": "6d59273f6fb7671bf1bb79ac81c63c12bc73633421"
 }
 ```
 
@@ -80,6 +81,7 @@ connection = ElvantoAPI.Connection(AccessToken=string, RefreshToken=string)
 ```
 
 #### For Non-Webapps
+
 After the user has logged in, they will be sent back to the specified redirect_uri, with a code. Unlike the WebApp method
 this code will be behind a hash.
 
@@ -117,6 +119,7 @@ If the argument is a list, simply use the list. For example:
 ```python
 AllPeople = connection.post("people/getAll", fields=["gender","family"])
 ```
+
 An example response is as follows:
 
 ```python
