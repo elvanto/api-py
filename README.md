@@ -14,6 +14,17 @@ This is an API wrapper to use in conjunction with an Elvanto account. This wrapp
 
 ### Installation
 
+####PIP Installation
+
+PIP is the preferred installation method.
+
+```
+python get-pip.py
+pip install ElvantoAPI
+```
+
+####Downloading
+
 * Download
 * Navigate to folder you downloaded the source
 * `python setup.py install`
