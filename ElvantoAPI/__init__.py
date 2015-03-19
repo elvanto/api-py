@@ -7,65 +7,65 @@ token_url = "https://api.elvanto.com/oauth/token"
 api_url = "https://api.elvanto.com/v1/"
 
 
-def _AuthorizeURL(client_id, redirect_uri, scope, WebOrNon, state=None):
+def _AuthorizeURL(ClientID, RedirectURI, Scope, WebOrNon, State=None):
     """
     Function to gain the URL needed for users to log in to your integration.
     Web Apps and Non Web Apps both use this function, it simply returns a different URL
     Non Web Apps don't use the state argument
-    :param client_id: Int - The Client ID of your integration
-    :param redirect_uri: Str - The URL to redirect users to after they have logged on
-    :param scope: List or Str - Scope the Web App requires to function
-    :param state: Optional Argument, only use if needed in your redirection call
+    :param ClientID: Int - The Client ID of your integration
+    :param RedirectURI: Str - The URL to redirect users to after they have logged on
+    :param Scope: List or Str - Scope the Web App requires to function
+    :param State: Optional Argument, only use if needed in your redirection call
     :param WebOrNon: Str - WebApp or NonWebApp. Web Apps and Non WebApps have different URLs they send users to
     :return: Returns a string representing the URL for users of your Web App to log inwith
     """
     if type(scope) == list:
         newscope = ""
-        for item in scope:
+        for item in Scope:
             newscope += item + ","
         newscope = newscope[:-1] #Trimming the final comma
     else:
-        newscope = scope
+        newscope = Scope
     if WebOrNon == "WebApp":
         if state:
             info = {
-                "id":str(client_id),
-                "uri": redirect_uri,
+                "id":str(ClientID),
+                "uri": RedirectURI,
                 "scope": newscope,
-                "state": state
+                "state": State
             }
             return oauth_url + "?type=web_server&client_id={id}&redirect_uri={uri}&scope={scope}&state={state}".format(**info)
         else:
             info = {
-                "id": str(client_id),
-                "uri": redirect_uri,
+                "id": str(ClientID),
+                "uri": RedirectURI,
                 "scope": newscope
             }
             return oauth_url + "?type=web_server&client_id={id}&redirect_uri={uri}&scope={scope}".format(**info)
     elif WebOrNon == "NonWebApp":
         info = {
-            "id":str(client_id),
-            "uri": redirect_uri,
+            "id":str(ClientID),
+            "uri": RedirectURI,
             "scope": newscope
         }
         return oauth_url + "?type=user_agent&client_id={id}&redirect_uri={uri}&scope={scope}".format(**info)
 
 
-def _GetTokens(client_id, client_secret, code, redirect_uri):
+def _GetTokens(ClientID, ClientSecret, Code, RedirectURI):
     """
     Gets the acccess tokens, after the user has logged into the Web App via URL provided in the getURL function
-    :param client_id: Int - Client ID of your integration
-    :param client_secret: Str - Client Secret of your integration
-    :param code: Int - The Code returned after user logs in
-    :param redirect_uri: Str - The redirect_uri specified in getURL
+    :param ClientID: Int - Client ID of your integration
+    :param ClientSecret: Str - Client Secret of your integration
+    :param Code: Int - The Code returned after user logs in
+    :param RedirectURI: Str - The redirect_uri specified in getURL
     :return: Dict object, in the form {"access_token":string,"expires_in":int,"refresh_token":string}
     """
     global token_url
     info = {
-        "client_id": client_id,
-        "client_secret": client_secret,
-        "code": code,
-        "redirect_uri": redirect_uri
+        "client_id": ClientID,
+        "client_secret": ClientSecret,
+        "code": Code,
+        "redirect_uri": RedirectURI
     }
     params = "grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&code={code}&redirect_uri={redirect_uri}".format(**info)
     headers = {
@@ -121,7 +121,7 @@ class Connection():
 
 
 
-    def _Post(self, endpoint, **kwargs): #API Endpoint, Arguements -> json File
+    def _Post(self, endpoint, **kwargs):
         """
         How the wrapper does the API Calls.
         :param endpoint: Endpoint of the API Call. Ie people/getInfo
@@ -145,7 +145,7 @@ class Connection():
                 if self.refresh_token: #Can't refresh if no refresh token
                     self._RefreshToken() #Refresh Tokens
                     info = self._Post(endpoint, **kwargs) #Make call again
-                else:
+                else: #Non Web Apps can't use the refresh token.
                     return {
                         "status":"Token expired please renew"
                     }

@@ -10,7 +10,7 @@ The Elvanto API supports authentication using either <a href="https://www.elvant
 
 * Quick summary
 This is an API wrapper to use in conjunction with an Elvanto account. This wrapper can be used by developers to develop programs for their own churches, or to design integrations to share to other churches using OAuth authentication.
-* Version 1.0
+* Version 1.3
 
 ### Installation
 
@@ -86,7 +86,7 @@ After the user has logged in, they will be sent back to the specified redirect_u
 this code will be behind a hash.
 
 ```python
-http://mywebapp.com/login/#code=string&expiresin=int
+http://mynonwebapp.com/login/#code=string&expiresin=int
 ```
 
 Have the users copy this code into your app. This code will expire in the value provided by the integer, in seconds. 
