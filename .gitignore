@@ -1,0 +1,5 @@
+.idea/**
+*.pyc
+dist/**
+ElvantoAPI.egg-info
+*.txt
