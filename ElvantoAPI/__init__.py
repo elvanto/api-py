@@ -72,8 +72,7 @@ def _GetTokens(ClientID, ClientSecret, Code, RedirectURI):
         "Content-Type":"application/x-www-form-urlencoded"
     }
     data = requests.post(token_url, data=params, headers=headers)
-    string = data.text.decode('UTF-8')
-    return json.loads(string)
+    return json.loads(data.text)
     
 
 class Connection():
@@ -114,8 +113,7 @@ class Connection():
         }
         params = "grant_type=refresh_token&refresh_token={refresh_token}".format(self.refresh_token)
         data = requests.post(url, data=params, headers=headers)
-        string = data.text.decode('UTF-8')
-        new_tokens = json.loads(string)
+        new_tokens = json.loads(data.text)
         self.refresh_token = new_tokens["refresh_token"]
         return
 
@@ -137,9 +135,8 @@ class Connection():
         else:
             posturl = api_url + endpoint + ".json"
 
-        self.data = self.s.post(posturl, json=kwargs) #This is the code that does the actual call.
-        string=self.data.text.decode('UTF-8') #Decoding the response to be something python will like
-        info = json.loads(string)
+        self.data = self.s.post(posturl, json=kwargs) #This is the code that does the actual call
+        info = json.loads(data.text)
         if info["status"] != "ok":
             if int(info["error"]["code"]) == 121: #Token Expired
                 if self.refresh_token: #Can't refresh if no refresh token
