@@ -136,7 +136,7 @@ class Connection():
             posturl = api_url + endpoint + ".json"
 
         self.data = self.s.post(posturl, json=kwargs) #This is the code that does the actual call
-        info = json.loads(data.text)
+        info = json.loads(self.data.text)
         if info["status"] != "ok":
             if int(info["error"]["code"]) == 121: #Token Expired
                 if self.refresh_token: #Can't refresh if no refresh token
