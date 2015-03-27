@@ -1,6 +1,6 @@
 # Elvanto API Python Library
 
-This library is all set to go with version 1.3.1 of the <a href="https://www.elvanto.com/api/" target="_blank">Elvanto API</a>.
+This library is all set to go with version 1.3.2 of the <a href="https://www.elvanto.com/api/" target="_blank">Elvanto API</a>.
 This library works for both Python 2.7, and Python 3.4
 
 ## Authenticating
@@ -11,7 +11,7 @@ The Elvanto API supports authentication using either <a href="https://www.elvant
 
 * Quick summary
 This is an API wrapper to use in conjunction with an Elvanto account. This wrapper can be used by developers to develop programs for their own churches, or to design integrations to share to other churches using OAuth authentication.
-* Version 1.3.1
+* Version 1.3.2
 
 ### Installation
 
