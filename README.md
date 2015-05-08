@@ -103,66 +103,91 @@ connection = ElvantoAPI.Connection(AccessToken=string)
 To perform a call, simply use the end point and any arguments required.
 
 ```python
-connection.post("people/getAll")
-connection.post("people/create", firstname = "John", lastname = "Smith")
+connection._Post("people/getAll")
+connection._Post("people/create", firstname = "John", lastname = "Smith")
 ```
 
 All calls return a dict object, to indicate if it was successful or not.
 
-If the call has an argument that is an object, such as the search field, it needs to be a dict. For example:
+If an argument is to be a JSON object, enter it as a Dict type object. Arrays can be entered simply as a list.
 
+For example.
 ```python
-search=connection.post("people/search", search={"firstname":"John", "locations":"Nashville"})
+search=connection._Post("people/search",search={"firstname":"John", "volunteer":"Yes"}, fields=["birthday","school_grade"])
 ```
 
-If the argument is a list, simply use the list. For example:
-
-```python
-AllPeople = connection.post("people/getAll", fields=["gender","family"])
-```
 
 An example response is as follows:
 
 ```python
 {
-  "status": "ok", 
-  "generated_in": "0.128", 
-  "people": {
-    "on_this_page": 765, 
-    "per_page": 1000, 
-    "total": 765, 
-    "page": 1, 
-    "person": [
-      {                
-        "username": "example.person", 
-        "preferred_name": "", 
-        "timezone": "", 
-        "id": "02509a6a-8309-11e3-9edb-094b5ffbcb0b", 
-        "archived": 0, 
-        "family_id": "", 
-        "family_relationship": "Other", 
-        "last_login": "", 
-        "email": "", 
-        "status": "Active", 
-        "picture": "https://d5w68ic4qi8w5.cloudfront.net/img/default_gravatar.png", 
-        "firstname": "Example", 
-        "lastname": "Person", 
-        "phone": "", 
-        "date_added": "2014-01-22 02:00:46", 
-        "volunteer": 0, 
-        "date_modified": "2015-02-26 05:07:06", 
-        "admin": 0, 
-        "country": "", 
-        "mobile": "", 
-        "contact": 0, 
-        "category_id": "c374a4b8-eb06-11e0-9229-ea942707ad51", 
-        "deceased": 0
-      },
-      ... (764 other responses not shown)
-    ]
-	}
+    "status": "ok", 
+    "generated_in": "0.035", 
+    "people": {
+        "on_this_page": 2, 
+        "per_page": 1000, 
+        "total": 2, 
+        "page": 1, 
+        "person": [
+            {
+                "username": "john.feeney", 
+                "preferred_name": "", 
+                "timezone": "", 
+                "id": "7a411238-6fbc-11e0-bda8-de12be825216", 
+                "archived": 0, 
+                "family_id": "", 
+                "family_relationship": "Other", 
+                "last_login": "", 
+                "email": "fee-ney-john@syllables.com", 
+                "status": "Active", 
+                "picture": "https://d5w68ic4qi8w5.cloudfront.net/img/default_gravatar.png", 
+                "school_grade": "12", 
+                "firstname": "John", 
+                "lastname": "Feeney", 
+                "phone": "", 
+                "birthday": "", 
+                "date_added": "2011-04-26 04:20:08", 
+                "volunteer": 1, 
+                "date_modified": "2015-02-26 05:07:06", 
+                "admin": 0, 
+                "country": "", 
+                "mobile": "0456833923", 
+                "contact": 0, 
+                "category_id": "c37482a8-eb06-11e0-9229-ea942707ad51", 
+                "deceased": 0
+            }, 
+            {
+                "username": "john.hua", 
+                "preferred_name": "", 
+                "timezone": "", 
+                "id": "7bcc31fa-6fbc-11e0-bda8-de12be825216", 
+                "archived": 0, 
+                "family_id": "", 
+                "family_relationship": "Other", 
+                "last_login": "", 
+                "email": "johnhua@example.com", 
+                "status": "Active", 
+                "picture": "https://d5w68ic4qi8w5.cloudfront.net/img/default_gravatar.png", 
+                "school_grade": "", 
+                "firstname": "John", 
+                "lastname": "Hua", 
+                "phone": "", 
+                "birthday": "", 
+                "date_added": "2011-04-26 04:20:08", 
+                "volunteer": 1, 
+                "date_modified": "2015-02-26 05:07:06", 
+                "admin": 0, 
+                "country": "", 
+                "mobile": "0451783968", 
+                "contact": 0, 
+                "category_id": "c37482a8-eb06-11e0-9229-ea942707ad51", 
+                "deceased": 0
+            }
+        ]
+    }
 }
 ```
+
 
 ## Documentation
 
