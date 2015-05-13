@@ -199,6 +199,6 @@ Follow our <a href="http://twitter.com/ElvantoAPI" target="_blank">Twitter</a> t
 
 ## Support
 
-For bugs with the API Python Wrapper please use the <a href="https://github.com/elvanto/api-py/wiki">Wiki</a>.
+For bugs with the API Python Wrapper please use the <a href="https://github.com/elvanto/api-py/issues">Issue Tracker</a>.
 
 For suggestions on the API itself, please <a href="http://support.elvanto.com/support/discussions/forums/1000123316" target="_blank">post in the forum</a> or contact us <a href="http://support.elvanto.com/support/tickets/new/" target="_blank">via our website</a>.
