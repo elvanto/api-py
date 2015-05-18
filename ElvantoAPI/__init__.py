@@ -19,7 +19,7 @@ def _AuthorizeURL(ClientID, RedirectURI, Scope, WebOrNon, State=None):
     :param WebOrNon: Str - WebApp or NonWebApp. Web Apps and Non WebApps have different URLs they send users to
     :return: Returns a string representing the URL for users of your Web App to log inwith
     """
-    if type(scope) == list:
+    if type(Scope) == list:
         newscope = ""
         for item in Scope:
             newscope += item + ","
@@ -27,7 +27,7 @@ def _AuthorizeURL(ClientID, RedirectURI, Scope, WebOrNon, State=None):
     else:
         newscope = Scope
     if WebOrNon == "WebApp":
-        if state:
+        if State:
             info = {
                 "id":str(ClientID),
                 "uri": RedirectURI,
