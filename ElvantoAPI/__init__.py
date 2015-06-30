@@ -1,5 +1,6 @@
 import requests
 import json
+import time as Time
 
 
 oauth_url = "https://api.elvanto.com/oauth"
@@ -101,7 +102,7 @@ class Connection():
             raise SyntaxError("Invalid Auth. Please use APIKey=String or AccessToken=String, ExpiresIn=Float")
 
 
-    def _RefreshToken(self):
+    def _RefreshToken(self, time=False):
         """
         Function to refresh the tokens.
         :param time: Optional argument. Set to true if you want to return the new expires_in value
@@ -115,7 +116,10 @@ class Connection():
         data = requests.post(url, data=params, headers=headers)
         new_tokens = json.loads(data.text)
         self.refresh_token = new_tokens["refresh_token"]
-        return
+        self.access_token = new_tokens["access_token"]
+        if time:
+            return Time.time()
+        else: return
 
 
 
