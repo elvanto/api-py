@@ -74,7 +74,7 @@ def _GetTokens(ClientID, ClientSecret, Code, RedirectURI):
     }
     data = requests.post(token_url, data=params, headers=headers)
     return json.loads(data.text)
-    
+
 
 class Connection():
     def __init__(self, **auth):
@@ -139,7 +139,7 @@ class Connection():
         else:
             posturl = api_url + endpoint + ".json"
 
-        self.data = self.s.post(posturl, json=kwargs) #This is the code that does the actual call
+        self.data = self.s.post(posturl, data=kwargs) #This is the code that does the actual call
         info = json.loads(self.data.text)
         if info["status"] != "ok":
             if int(info["error"]["code"]) == 121: #Token Expired
