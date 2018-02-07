@@ -113,7 +113,7 @@ class Connection():
             "Content-Type":"application/x-www-form-urlencoded"
         }
         params = "grant_type=refresh_token&refresh_token={refresh_token}".format(self.refresh_token)
-        data = requests.post(url, data=params, headers=headers)
+        data = requests.post(token_url, data=params, headers=headers)
         new_tokens = json.loads(data.text)
         self.refresh_token = new_tokens["refresh_token"]
         self.access_token = new_tokens["access_token"]
@@ -134,11 +134,7 @@ class Connection():
         :return: Returns a Dict that corresponds to the JSON for the API call.
         """
         global api_url
-        if endpoint[:-1] == ".":
-            posturl = api_url + endpoint + "json"
-        else:
-            posturl = api_url + endpoint + ".json"
-
+        posturl = api_url + endpoint + ("" if endpoint[:-1] == "." else ".") + "json"
         self.data = self.s.post(posturl, data=kwargs) #This is the code that does the actual call
         info = json.loads(self.data.text)
         if info["status"] != "ok":
