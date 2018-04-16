@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(name="ElvantoAPI",
-      version='1.4.1',
+      version='1.4.2',
       description='Python API Wrapper for Elvanto Systems',
       url='https://github.com/elvanto/api-py',
       author='Elvanto',
