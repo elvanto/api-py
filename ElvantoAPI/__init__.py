@@ -135,7 +135,7 @@ class Connection():
         """
         global api_url
         posturl = api_url + endpoint + ("" if endpoint[:-1] == "." else ".") + "json"
-        self.data = self.s.post(posturl, data=kwargs) #This is the code that does the actual call
+        self.data = self.s.post(posturl, json=kwargs) #This is the code that does the actual call
         info = json.loads(self.data.text)
         if info["status"] != "ok":
             if int(info["error"]["code"]) == 121: #Token Expired
